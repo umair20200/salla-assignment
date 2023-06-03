@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
 import { ShopContext } from "../context/shop-context";
 import { useEffect } from "react";
-import {URL} from "../constant"
+import { URL } from "../constant";
 
 export const Navbar = () => {
   const { cartItems, removeFromCart, addToCart } = useContext(ShopContext);
@@ -17,10 +17,9 @@ export const Navbar = () => {
       method: "GET",
 
       headers: {
-     
-          'Accept': 'application/json',
-         
-        "Content-Type": "application/json"
+        Accept: "application/json",
+
+        "Content-Type": "application/json",
       },
     })
       .then((data) => {
@@ -31,6 +30,7 @@ export const Navbar = () => {
       });
   };
   const deleteCartItem = async (id) => {
+    console.log(id)
     removeFromCart(id);
     fetch(`${URL.cartProductUrl}/${id}`, {
       method: "DELETE",
@@ -38,8 +38,7 @@ export const Navbar = () => {
       headers: {
         "Content-Type": "application/json",
       },
-    })
-     
+    });
   };
 
   const [pass, setPass] = useState("");
@@ -142,8 +141,7 @@ export const Navbar = () => {
                             </a>
                             <button
                               onClick={() => {
-                                deleteCartItem(item.id)
-                               
+                                deleteCartItem(item.id);
                               }}
                               type="button"
                               className="w-[28px] h-[28px] shrink-0 flex items-center justify-center text-xs border border-red-500 text-red-500 rounded-full p-1"
