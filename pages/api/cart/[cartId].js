@@ -9,13 +9,9 @@ async function handler(req, res) {
   const db = client.db();
   if (req.method === "DELETE") {
     
-    const cartItemId =  new ObjectId(req.query.cartId);
-    console.log(cartItemId)
+    const cartItemId =  req.query.cartId;
     const cart = await db.collection("Cart");
-    let obj= await cart.find({"_id":cartItemId})
-
-    obj.toArray().then((data)=>{console.log(data)})
-    const result = await cart.deleteOne({ "_id": cartItemId });
+    const result = await cart.deleteOne({ "id": cartItemId });
     client.close();
     res.status(200).json({ msg: "deleted Successfully", response: result });
   }
