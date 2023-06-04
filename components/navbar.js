@@ -2,6 +2,7 @@ import React, { useState, useContext } from "react";
 import { ShopContext } from "../context/shop-context";
 import { useEffect } from "react";
 import { URL } from "../constant";
+import { Login } from "../modals/login-modal";
 
 export const Navbar = () => {
   const { cartItems, removeFromCart, addToCart } = useContext(ShopContext);
@@ -46,7 +47,7 @@ export const Navbar = () => {
   const [showCartItem, setShowCartItem] = useState(false);
   const [showLoginModal, setShowLoginModal] = useState(false);
   const handleSubmit = (e) => {
-    e.preventDefault();
+   
     localStorage.setItem("isLogged", true);
     SetisLogged(true);
     closeloginPopup();
@@ -160,76 +161,7 @@ export const Navbar = () => {
         </div>
       </header>
       {/* <!--login modal--> */}
-      <div
-        className={`w-screen h-screen absolute top-0 end-0 bottom-0 left-0 bg-gray-500/70 p-4 py-8 px-4 z-50 flex items-start justify-center overflow-y-auto overflow-x-hidden ${
-          showLoginModal ? "" : "hidden"
-        }`}
-      >
-        <div className="w-full sm:w-[50%] max-w-[400px] h-auto p-4 bg-white rounded-lg shadow-xl">
-          {/* <!-- modal header --> */}
-          <div className="flex items-center justify-between mb-8 gap-4">
-            <div className="flex-1">
-              <h2 className="text-lg">تسجيل الدخول</h2>
-              <span className="text-xs text-gray-500">
-                قم بتسجيل الدخول لمتابعة التسوق
-              </span>
-            </div>
-            <button
-              onClick={closeloginPopup}
-              type="button"
-              className="w-[28px] h-[28px] shrink-0 flex items-center justify-center text-xs border border-red-500 text-red-500 rounded-full p-1"
-            >
-              <i className="sicon-cancel"></i>
-            </button>
-          </div>
-          <div className="flex flex-col w-full">
-            <form
-              method="post"
-              onSubmit={handleSubmit}
-              className="flex flex-col"
-            >
-              <div className="mb-4">
-                <label className="block mb-2 text-md">اسم المستخدم</label>
-                <input
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  type="text"
-                  name="username"
-                  id="username"
-                  className="w-full p-2 bg-white appearance-none rounded-md border text-md"
-                  placeholder="اسم المستخدم.."
-                />
-              </div>
-              <div className="mb-4">
-                <label className="block mb-2 text-md">كلمة المرور</label>
-                <input
-                  value={pass}
-                  onChange={(e) => setPass(e.target.value)}
-                  type="password"
-                  name="password"
-                  id="password"
-                  className="w-full p-2 bg-white appearance-none rounded-md border text-md"
-                  placeholder="كلمة المرور.."
-                />
-              </div>
-              <div className="flex gap-4">
-                <button
-                  type="submit"
-                  className="w-full bg-primary text-secondary flex-1 p-2 text-md rounded-md"
-                >
-                  دخول
-                </button>
-                <button
-                  type="button"
-                  className="w-fit text-primary underline p-2 text-md rounded-md"
-                >
-                  نسيت كلمة المرور؟
-                </button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
+      <Login showLoginModal={showLoginModal} setShowLoginModal={setShowLoginModal} handleSubmit={handleSubmit}></Login>
     </>
   );
 };

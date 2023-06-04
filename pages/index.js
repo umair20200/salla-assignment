@@ -1,6 +1,6 @@
 import { Navbar } from "../components/navbar";
 import { Footer } from "../components/footer";
-import { Shop } from "../components/main";
+import { Shop } from "../components/shop";
 import { ShopContextProvider} from '../context/shop-context'
 import { MongoClient } from "mongodb";
 import { useState } from "react";
